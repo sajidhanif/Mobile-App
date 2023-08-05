@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TodoListApp"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.Inputkit" xmlns:input1="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             x:Class="TodoListApp.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:TodoListViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <!--<Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+        <Label Text="Welcome to BORIS" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label Text="1. Check for new job updates:" FontSize="Title" Padding="30,10,30,10"/>
+        <Button Text="Receive Updates" Font="title"/>
+
+        <Label Text="2. Clock In/Out:" FontSize="Title" Padding="30,10,30,10"/>
+        <Button Text="Clock Card" Font="title"/>
+
+        <Label Text="3. Your available jobs:" FontSize="Title" Padding="30,10,30,10"/>
+        <Button Text="Scheduled Work" Font="title"/>
+
+        <Label Text=" " FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Error Reporting:" FontSize="Title" Padding="30,10,30,10"/>
+        <Button Text="Email Log Files" Font="title"/>
+        <Button Text="Send Database" Font="title"/>-->
+
+        
+        <Entry
+             x:Name="InputField"
+             Text="{Binding NewTodoInputValue}"
+             Placeholder="Enter Notes"
+             ReturnCommand="{Binding AddTodoCommand}"
+
+         />
+        
+   
+   
+    <ListView x:Name="TodoList" ItemsSource="{Binding TodoItems}" >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    
+                    <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" Padding="20, 0">
+
+                        <input:CheckBox IsChecked="{Binding Complete}" />
+
+                        <Label Text="{Binding TodoText}" FontSize="Large"/>
+
+                        <ImageButton
+                            Source="delete.png"
+                            Scale="0.6"
+                            Command="{Binding Path=BindingContext.RemoveTodoCommand, Source={x:Reference TodoList}}"
+                            CommandParameter="{Binding .}"
+
+                            />
+
+                    </FlexLayout>
+
+
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+
+
+    </StackLayout>
+
+</ContentPage>
+
